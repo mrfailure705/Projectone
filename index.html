@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>www.GrowwPortfolio.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style>
+        body>*:not(#licenseGate) {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+        }
+
+        .card {
+            width: 360px;
+            background: #fff;
+            margin: 20px auto;
+            padding: 15px;
+            height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            margin-bottom: 7%;
+        }
+
+        .left {
+            display: flex;
+            gap: 10px;
+        }
+
+        #icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        .title {
+            font-weight: 600;
+        }
+
+        .price {
+            color: #00b386;
+            font-size: 14px;
+        }
+
+        .loss {
+            color: #888;
+        }
+
+        .depth-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 203px;
+            display: inline-flex;
+            margin-left: 5px;
+        }
+
+        .depth-row img {
+            margin-left: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .tabs span {
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .tabs .active {
+            background: #dff7ef;
+            color: #00b386;
+        }
+
+        .tabs {
+            margin-bottom: 5%;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        hr {
+            width: 100%;
+            height: 0.01px;
+            background-color: whitesmoke;
+            margin-bottom: 6%;
+        }
+
+        .qtyBox {
+            display: flex;
+            align-items: center;
+            background: #e6f8f3;
+            border-radius: 8px;
+        }
+
+        .qtyBox button {
+            border: none;
+            background: none;
+            padding: 8px 12px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #00b386;
+        }
+
+        .qtyBox input {
+            width: 50px;
+            border: none;
+            text-align: center;
+            background: transparent;
+            font-size: 16px;
+        }
+
+        .muted {
+            color: #aaa;
+        }
+
+        .protected {
+            background: #fff6df;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 30%;
+        }
+
+        .buy {
+            width: 100%;
+            padding: 12px;
+            background: #00c389;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .add-position {
+            width: 100%;
+            padding: 12px;
+            background: #e6f8f3;
+            border: 2px dashed #00c389;
+            color: #00c389;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .add-position:hover {
+            background: #dff7ef;
+        }
+
+        .editable {
+            outline: none;
+            border: none;
+            background: transparent;
+            font-weight: normal;
+            cursor: text;
+        }
+
+        .editable:focus {
+            background: #f5f6f7;
+            border-radius: 4px;
+            padding: 2px 4px;
+        }
+
+        .position-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background: #fafbfc;
+        }
+
+        .position-block .header {
+            margin-bottom: 3%;
+        }
+
+        .position-block:not(:first-child) .header {
+            margin-top: 20px;
+        }
+
+        /* ===== POSITIONS CSS ===== */
+
+        .app {
+            max-width: 420px;
+            margin: auto;
+            background: #fff;
+            min-height: 100vh;
+            display: none;
+        }
+
+        .indices {
+            display: flex;
+            gap: 10px;
+            padding: 12px;
+        }
+
+        .index-card {
+            flex: 1;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            color: #666;
+        }
+
+        .index-card b {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+            padding-bottom: 7px;
+        }
+
+        .green {
+            color: #00b386;
+        }
+
+        .grey {
+            color: #888;
+        }
+
+        .tabs {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding-left: 9px;
+        }
+
+        .tab {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            background: #f0f1f3;
+            color: #555;
+            border: 2px solid #ccc;
+        }
+
+
+        .tab.active {
+            background: #fff;
+            border: 1px solid #ccc;
+            font-weight: 600;
+        }
+
+        .section {
+            padding: 12px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .exit {
+            color: #00b386;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .position {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            color: rgb(119, 116, 116);
+        }
+
+        .label {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 9px;
+        }
+
+        .instrument {
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .sub {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .profit {
+            color: #666;
+            font-weight: 600;
+            padding-bottom: 11px;
+        }
+
+        .profit.profit-green {
+            color: #00b386 !important;
+        }
+
+        .profit.profit-red {
+            color: #f6461a !important;
+        }
+
+        .zero {
+            color: #999;
+        }
+
+        .total {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            font-weight: 500;
+            border-top: 1px solid #eee;
+            background-color: whitesmoke;
+            
+        }
+
+        .total #totalPnl {
+            display: flex;
+            margin-top: 12px;
+            /* background-color: red; */
+            width: 25%;
+            align-items: center;
+            justify-content: flex-end;
+            align-items: center;
+            /* padding-right: 10px; */
+        }
+
+        .total .tr {
+            color: #666;
+            padding-right: 4px;
+        }
+
+        .search {
+            /* width: 100%; */
+            margin: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 14px;
+            padding-right: 14px;
+            border: 2px solid #f0f1f3;
+            border-radius: 50px;
+        }
+
+        .search img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .Groww {
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- LICENSE GATE -->
+    <div id="licenseGate" style="
+    position:fixed;
+    inset:0;
+    background:#f5f7f8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    font-family:Arial, sans-serif;
+">
+        <div style="
+        background:#fff;
+        padding:24px;
+        border-radius:12px;
+        width:90%;
+        max-width:360px;
+        box-shadow:0 10px 30px rgba(0,0,0,.1);
+        text-align:center;
+    ">
+            <h3 style="margin-bottom:8px;">Activate License</h3>
+            <p style="font-size:13px;color:#667085;margin-bottom:16px;">
+                Enter your license key to continue
+            </p>
+
+            <input id="licenseInput" placeholder="XXXX-XXXX-XXXX"
+                style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin-bottom:12px;">
+
+            <button onclick="activateLicense()" style="
+            width:100%;
+            padding:12px;
+            background:#0b69ff;
+            color:#fff;
+            border:none;
+            border-radius:8px;
+            font-size:15px;
+            cursor:pointer;
+        ">Activate</button>
+
+            <div style="margin-top:14px;font-size:12px;color:#667085">
+                <strong id="deviceCode" style="word-break:break-all;color:#0b69ff"></strong>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= ORDER UI ================= -->
+    <div class="card" id="orderUI">
+
+        <!-- Positions Container -->
+        <div id="positionsContainer">
+            <div class="position-block">
+                <!-- Header INCLUDED in each block -->
+                <div class="header">
+                    <div class="left">
+                        <div>
+                            <div class="title editable symbol" contenteditable="true">NIFTY 06 Apr 17700 Call</div>
+                            <div class="price">
+                                ₹<span class="price-val editable" contenteditable="true">191.45</span>
+                                <span class="loss editable" contenteditable="true">(-62.34%)</span>
+                                <div class="depth-row">
+                                    <span class="depth">Depth</span>
+                                    <img
+                                        src="https://usafiesta.com/wp-content/uploads/2025/12/331062985_1344753429636190_466493193876031836_n.jpg" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <span class="active">Delivery</span>
+                    <span>Intraday</span>
+                </div>
+
+                <div class="row">
+                    <span>Qty <b class="lotInfo editable" contenteditable="true">1 lot x 75</b></span>
+                    <div class="qtyBox">
+                        <button class="qty-minus">−</button>
+                        <input type="text" class="qty" value="75" readonly>
+                        <button class="qty-plus">+</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <span>Price <b>Market</b></span>
+                    <span class="muted">At Market</span>
+                </div>
+
+                <div class="row">
+                    Enter Ltp
+                    <span class="ltp editable" contenteditable="true">280</span>
+                </div>
+
+                <div class="protected">This order is protected</div>
+                <hr>
+            </div>
+        </div>
+
+        <!-- Add Position Button -->
+        <button class="add-position" id="addPositionBtn">➕ Add Position</button>
+
+        <!-- Balance & Approx (Global) -->
+        <div class="row">
+            <span>
+                Balance : ₹
+                <span id="balance" contenteditable="true" class="editable">167,761</span>
+            </span>
+            <span>Approx req : ₹<b id="approx">108.75</b></span>
+        </div>
+
+        <!-- BUY Button -->
+        <button class="buy" onclick="buyNow()">BUY</button>
+    </div>
+
+    <!-- ================= POSITIONS UI ================= -->
+    <div class="app" id="positionsUI">
+        <div class="amit">
+
+
+
+            <div class="search">
+                <img src="https://usafiesta.com/wp-content/uploads/2025/12/unnamed.webp" />
+                <p class="Groww">Search Groww</p>
+                <img src="https://usafiesta.com/wp-content/uploads/2025/12/uhfeiw.jpg" />
+            </div>
+
+            <div class="indices">
+                <div class="index-card">
+                    <b>NIFTY 50</b>
+                    <span id="niftyValue">26048</span>
+                    <span class="green" id="niftyChange">+23.35 (0.18%)</span>
+                </div>
+
+                <div class="index-card">
+                    <b>BANKNIFTY</b>
+                    <span id="bankValue">58048</span>
+                    <span class="green" id="bankChange">+10.35 (0.32%)</span>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab">Holdings</div>
+                <div class="tab active">Positions</div>
+                <div class="tab">Orders</div>
+                <!-- <div class="tab">Basket</div> -->
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span id="positionsCount">F&O Positions (0)</span>
+                    <span class="exit">Exit</span>
+                </div>
+
+                <div id="positionsList"></div>
+            </div>
+
+            <div class="total">
+                <span class="tr">Total returns</span>
+                <span class="profit" id="totalPnl">₹12,34,567.89</span>
+            </div>
+
+        </div>
+
+        <script>
+            let positions = [];
+            let marketTimer = null;
+            let bankBase = 58048;
+
+            // ✅ FIXED: अब negative के लिए -₹value और positive के लिए +₹value दिखेगा
+            function formatPNL(value) {
+                const absValue = Math.abs(value).toFixed(2);
+                if (value >= 0) {
+                    return `+₹${absValue}`;
+                } else {
+                    return `-₹${absValue}`;
+                }
+            }
+
+            // ===== Qty Handlers for each block =====
+            function getLotSizeFromText(elem) {
+                const match = elem.innerText.match(/x\s*(\d+)/);
+                return match ? parseInt(match[1]) : 1;
+            }
+
+            function bindQtyHandlers(block) {
+                const lotInfo = block.querySelector('.lotInfo');
+                const qtyInput = block.querySelector('.qty');
+                const minus = block.querySelector('.qty-minus');
+                const plus = block.querySelector('.qty-plus');
+
+                function change(step) {
+                    const lot = getLotSizeFromText(lotInfo);
+                    let next = parseInt(qtyInput.value) + step * lot;
+                    qtyInput.value = Math.max(lot, next);
+                    calculateApproxAll();
+                }
+
+                if (minus) minus.onclick = () => change(-1);
+                if (plus) plus.onclick = () => change(1);
+            }
+
+            // ===== Calculate total approx required =====
+            function calculateApproxAll() {
+                const blocks = document.querySelectorAll('.position-block');
+                let total = 0;
+
+                blocks.forEach(block => {
+                    const qtyInput = block.querySelector('.qty');
+                    const priceVal = block.querySelector('.price-val');
+                    const qtyVal = parseInt(qtyInput.value) || 0;
+                    const buyPrice = parseFloat(priceVal.innerText) || 0;
+                    total += qtyVal * buyPrice;
+                });
+
+                document.getElementById('approx').innerText = total.toFixed(2);
+            }
+
+            // ===== Add Position Button =====
+            document.getElementById("addPositionBtn").addEventListener("click", () => {
+                const container = document.getElementById("positionsContainer");
+                const firstBlock = container.querySelector(".position-block");
+                const clone = firstBlock.cloneNode(true);
+
+                clone.querySelector('.qty').value = "75";
+                clone.querySelector('.ltp').innerText = "280";
+                clone.querySelector('.symbol').innerText = "NIFTY 06 Apr 17700 Call";
+                clone.querySelector('.price-val').innerText = "191.45";
+
+                container.appendChild(clone);
+                bindQtyHandlers(clone);
+                calculateApproxAll();
+            });
+
+            // ===== Initial setup =====
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.position-block').forEach(bindQtyHandlers);
+                calculateApproxAll();
+
+                document.addEventListener('input', function (e) {
+                    if (e.target.classList.contains('price-val') ||
+                        e.target.classList.contains('qty') ||
+                        e.target.classList.contains('ltp')) {
+                        calculateApproxAll();
+                    }
+                });
+            });
+
+            // ===== SINGLE POSITION PNL UPDATE =====
+            function updateSinglePositionPNL(idx) {
+                const pos = positions[idx];
+                if (!pos) return;
+
+                const pnl = (pos.ltp - pos.buyAvg) * pos.qty;
+                const pnlSpan = document.querySelector(`.pPnl[data-idx="${idx}"]`);
+                if (pnlSpan) {
+                    pnlSpan.innerText = formatPNL(pnl);
+                    pnlSpan.className = `profit pPnl ${pnl >= 0 ? 'profit-green' : 'profit-red'}`;
+                }
+            }
+
+            // ===== TOTAL PNL UPDATE =====
+            function updateTotalPNL() {
+                let total = 0;
+                positions.forEach(pos => {
+                    total += (pos.ltp - pos.buyAvg) * pos.qty;
+                });
+
+                const totalPnl = document.getElementById("totalPnl");
+                if (totalPnl) {
+                    totalPnl.innerText = formatPNL(total);
+                    totalPnl.className = `profit ${total >= 0 ? 'profit-green' : 'profit-red'}`;
+                }
+            }
+
+            // ===== BUY NOW =====
+            function buyNow() {
+                document.getElementById('orderUI').style.display = "none";
+                document.getElementById('positionsUI').style.display = "block";
+
+                positions = [];
+                const blocks = document.querySelectorAll('.position-block');
+
+                blocks.forEach(block => {
+                    const symbol = block.querySelector('.symbol').innerText;
+                    const qty = parseInt(block.querySelector('.qty').value) || 0;
+                    const buyAvg = parseFloat(block.querySelector('.price-val').innerText) || 0;
+                    const ltpVal = parseFloat(block.querySelector('.ltp').innerText) || 0;
+
+                    if (qty > 0) {
+                        positions.push({
+                            symbol,
+                            qty,
+                            buyAvg,
+                            ltp: ltpVal,
+                            ltpTimer: null
+                        });
+                    }
+                });
+
+                renderPositionsUI();
+                startMarketTick();
+            }
+
+            // ===== RENDER POSITIONS =====
+            function renderPositionsUI() {
+                const list = document.getElementById("positionsList");
+                list.innerHTML = "";
+
+                positions.forEach((pos, idx) => {
+                    const pnl = (pos.ltp - pos.buyAvg) * pos.qty;
+
+                    const row = document.createElement("div");
+                    row.className = "position";
+                    row.innerHTML = `
+                    <div class="row">
+                    <div>
+                        <div class="label">Delivery</div>
+                        <div class="instrument">${pos.symbol}</div>
+                        <div class="sub">Mkt ₹<span class="pLtp" data-idx="${idx}">${pos.ltp.toFixed(2)}</span></div>
+                    </div>
+                    <div class="right">
+                        <div class="profit pQty">${pos.qty}</div>
+                        <div class="profit pPnl ${pnl >= 0 ? 'profit-green' : 'profit-red'}" data-idx="${idx}">${formatPNL(pnl)}</div>
+                        <div class="sub">Avg ₹<span class="pAvg">${pos.buyAvg.toFixed(2)}</span></div>
+                    </div>
+                    </div>
+                `;
+                    list.appendChild(row);
+                });
+
+                document.getElementById("positionsCount").innerText = `F&O Positions (${positions.length})`;
+                updateTotalPNL();
+            }
+
+            // ===== MARKET TICK - EACH POSITION INDEPENDENT =====
+            function startMarketTick() {
+                stopMarketTick();
+
+                positions.forEach((pos, idx) => {
+                    pos.ltpTimer = setInterval(() => {
+                        let change = (Math.random() * 4 - 2); // -2 to +2
+                        let nextLtp = Math.max(1, pos.ltp + change);
+
+                        pos.ltp = nextLtp;
+                        const ltpSpan = document.querySelector(`.pLtp[data-idx="${idx}"]`);
+                        if (ltpSpan) ltpSpan.innerText = nextLtp.toFixed(2);
+
+                        // IMMEDIATE UPDATE
+                        updateSinglePositionPNL(idx);
+                        updateTotalPNL();
+                    }, 800 + idx * 150); // Different speeds
+                });
+            }
+
+            function stopMarketTick() {
+                positions.forEach(pos => {
+                    if (pos.ltpTimer) {
+                        clearInterval(pos.ltpTimer);
+                        pos.ltpTimer = null;
+                    }
+                });
+            }
+
+            // ===== INDEX TICK =====
+            function startIndexTick() {
+                setInterval(() => {
+                    // NIFTY
+                    let nifty = document.getElementById("niftyValue");
+                    let niftyChg = document.getElementById("niftyChange");
+                    if (nifty && niftyChg) {
+                        let base = 26000;
+                        let current = parseFloat(nifty.innerText.replace(/,/g, ""));
+                        let move = (Math.random() * 20 - 10);
+                        let next = current + move;
+                        nifty.innerText = Math.round(next).toLocaleString();
+
+                        let diff = next - base;
+                        let pct = (diff / base * 100).toFixed(2);
+                        niftyChg.innerText = `${diff >= 0 ? "+" : ""}${diff.toFixed(2)} (${pct}%)`;
+                        niftyChg.style.color = diff >= 0 ? "#00b386" : "#f6461a";
+                    }
+
+                    // BANKNIFTY
+                    let bank = document.getElementById("bankValue");
+                    let bankChg = document.getElementById("bankChange");
+                    if (bank && bankChg) {
+                        let current = parseFloat(bank.innerText.replace(/,/g, ""));
+                        let move = (Math.random() * 40 - 20);
+                        let next = current + move;
+                        bank.innerText = Math.round(next).toLocaleString("en-IN");
+
+                        let realDiff = next - bankBase;
+                        let displayDiff = Math.max(-1.6, Math.min(1.6, realDiff));
+                        let pct = (realDiff / bankBase * 100).toFixed(2);
+
+                        bankChg.innerText = `${displayDiff >= 0 ? "+" : ""}${displayDiff.toFixed(2)} (${pct}%)`;
+                        bankChg.style.color = displayDiff >= 0 ? "#00b386" : "#f6461a";
+                        bankBase += realDiff * 0.05;
+                    }
+                }, 1500);
+            }
+
+            startIndexTick();
+        </script>
+
+        <script>
+            const SECRET = "OJW_PRIVATE_KEY_2025"; // Keep this private
+
+            function getDeviceId() {
+                let id = localStorage.getItem("device_id");
+                if (!id) {
+                    id = btoa(
+                        navigator.userAgent +
+                        screen.width +
+                        screen.height +
+                        Intl.DateTimeFormat().resolvedOptions().timeZone
+                    );
+                    localStorage.setItem("device_id", id);
+                }
+                return id;
+            }
+
+            function simpleHash(str) {
+                let h = 0;
+                for (let i = 0; i < str.length; i++) {
+                    h = (h << 5) - h + str.charCodeAt(i);
+                    h |= 0;
+                }
+                return Math.abs(h).toString(16).toUpperCase();
+            }
+
+            function generateLicense() {
+                return simpleHash(getDeviceId() + SECRET).slice(0, 12);
+            }
+
+            /* ===== ACTIVATE LICENSE ===== */
+            function activateLicense() {
+                const input = document.getElementById("licenseInput").value.trim().toUpperCase();
+                const valid = generateLicense();
+
+                if (input === valid) {
+                    localStorage.setItem("license_ok", "YES");
+
+                    // license screen hide
+                    document.getElementById("licenseGate").style.display = "none";
+
+                    // 🔓 website show
+                    document.querySelectorAll("body > *:not(#licenseGate)")
+                        .forEach(el => el.style.display = "block");
+
+                } else {
+                    alert("Invalid License Key");
+                }
+            }
+
+            /* ===== CHECK LICENSE ON LOAD ===== */
+            document.addEventListener("DOMContentLoaded", () => {
+
+                // show device code
+                const deviceEl = document.getElementById("deviceCode");
+                if (deviceEl) deviceEl.innerText = getDeviceId();
+
+                // already activated
+                if (localStorage.getItem("license_ok") === "YES") {
+                    document.getElementById("licenseGate").style.display = "none";
+
+                    document.querySelectorAll("body > *:not(#licenseGate)")
+                        .forEach(el => el.style.display = "block");
+                } else {
+                    // default: website hide
+                    document.querySelectorAll("body > *:not(#licenseGate)")
+                        .forEach(el => el.style.display = "none");
+                }
+            });
+        </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
